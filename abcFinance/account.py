@@ -18,11 +18,21 @@ class AccountSide(Enum):
         return self.name
 
 
+class AccountType(Enum):
+    ASSET = 1
+    LIABILITY = 2
+    INCOMEEXPENSE = 3
+    GAINLOSS = 4
+    STOCK = 5
+    FLOW = 6
+
+
 class Account:
     """ An account has two lists of debit and credit bookings """
-    def __init__(self):
+    def __init__(self, account_type):
         self.debit = 0
         self.credit = 0
+        self.account_type = account_type
 
     def get_balance(self):
         debitsum = self.debit
@@ -47,8 +57,8 @@ class Account:
 
 class AccountWithHistory(Account):
     """Account with additional logging of debit/credit history"""
-    def __init__(self):
-        super().__init__()
+    def __init__(self, account_type):
+        super().__init__(account_type)
         self.debit_history = []
         self.credit_history = []
 
